@@ -30,7 +30,7 @@ from gi.repository import Gtk, GObject
 
 from umalqurra.hijri_date import HijriDate
 
-import time, praytimeslib, datetime, pyglet
+import time, PrayTimesLib, datetime, pyglet
 
 # Import Glade File
 
@@ -259,7 +259,7 @@ class SalatTimes:
 
         self.adan_box = builder.get_object("combobox3")
 
-        self.calc_times = praytimeslib.PrayTimes()
+        self.calc_times = PrayTimesLib.PrayTimes()
 
         self.salat_times_grid = builder.get_object("grid1")
 
