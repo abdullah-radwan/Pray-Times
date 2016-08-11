@@ -1,0 +1,1359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.3 -->
+<interface>
+  <requires lib="gtk+" version="3.12"/>
+  <object class="GtkAboutDialog" id="aboutdialog1">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">About Pray Times</property>
+    <property name="icon">icon.jpg</property>
+    <property name="type_hint">dialog</property>
+    <property name="program_name">Pray Times</property>
+    <property name="version">5.0</property>
+    <property name="copyright" translatable="yes">Copyright (C) Abdullah Radwan
+Copyright (C) Praytimes.org team</property>
+    <property name="comments" translatable="yes">A simple program to get salat time.</property>
+    <property name="authors">Abdullah Radwan
+Praytimes.org team</property>
+    <property name="documenters">Abdullah Radwan</property>
+    <property name="artists">Abdullah Radwan</property>
+    <property name="logo">icon.jpg</property>
+    <property name="license_type">gpl-3-0</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="aboutdialog-vbox1">
+        <property name="can_focus">False</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="aboutdialog-action_area1">
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkListStore" id="adan_list">
+    <columns>
+      <!-- column-name Adan -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Makkah</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Madinah</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Egypt</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="ae_cities">
+    <columns>
+      <!-- column-name City -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Dubai</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Abu Dhabi</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Ajman</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Ras al Khaima</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Sharjah</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="bh_cities">
+    <columns>
+      <!-- column-name City -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Manama</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="cont_list">
+    <columns>
+      <!-- column-name Cont -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Saudi Arabia</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">United Arabic Emirates</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Yemen</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Kuwait</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Qatar</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Bahrain</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Sudan</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Algeria</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Tunisia</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Morocco</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Libya</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Syria</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Lebanon</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Jordan</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Iraq</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Palestine</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Egypt</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Oman</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="dz_cities">
+    <columns>
+      <!-- column-name City -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Algiers</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Annaba</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Bejaia</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Blida</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Constantine</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Oran</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Setif</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Skikda</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Tlemcen</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="eg_cities">
+    <columns>
+      <!-- column-name City -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Alexandria</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Asyut</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Cairo</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Port Said</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Suez</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Tanta</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="iq_cities">
+    <columns>
+      <!-- column-name City -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">An Najaf</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Baghdad</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Basra</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Erbil</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Kufa</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Mosul</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="jo_cities">
+    <columns>
+      <!-- column-name City -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Amman</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Irbid</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Madaba</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="kw_cities">
+    <columns>
+      <!-- column-name City -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Kuwait</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Al Jahara</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="lang_list">
+    <columns>
+      <!-- column-name Lang -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Arabic</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">English</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="lb_cities">
+    <columns>
+      <!-- column-name City -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Akka</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Baalbek</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Beirut</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Sidon</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Tyre</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="ly_cities">
+    <columns>
+      <!-- column-name City -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Agedabia</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Benghazi</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Misurata</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Sebha</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Tripoli</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Tubruq</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="ma_cities">
+    <columns>
+      <!-- column-name City -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Agadir</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Casablanca</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Fez</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Kenitra</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Marrakech</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Meknes</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Oujda</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Rabat</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Safi</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Tangier</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="om_cities">
+    <columns>
+      <!-- column-name City -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Muscat</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Salalah</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="ps_cities">
+    <columns>
+      <!-- column-name City -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Elat</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Gaza</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Haifa</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Tel Aviv</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="qa_cities">
+    <columns>
+      <!-- column-name City -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Doha</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="sa_cities">
+    <columns>
+      <!-- column-name City -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Riyadh</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Jeddah</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Makkah</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Madinah</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Dammam</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Onaizah</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Buraidah</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Taif</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Hail</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Jazan</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Abha</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Al Jouf</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Hafr Al Batin</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Najran</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Tabuk</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Al Qurayyat</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Al Baha</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Al Khafji</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkWindow" id="window2">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Settings - Pray Times</property>
+    <property name="window_position">center</property>
+    <property name="default_width">300</property>
+    <property name="default_height">150</property>
+    <property name="icon">icon.jpg</property>
+    <signal name="delete-event" handler="delete_event1" swapped="no"/>
+    <signal name="destroy-event" handler="delete_event1" swapped="no"/>
+    <child>
+      <object class="GtkNotebook" id="notebook1">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <child>
+          <object class="GtkBox" id="box2">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <property name="homogeneous">True</property>
+            <child>
+              <object class="GtkCheckButton" id="checkbutton1">
+                <property name="label" translatable="yes">Show Salat Times</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="xalign">0.5</property>
+                <property name="active">True</property>
+                <property name="draw_indicator">True</property>
+                <signal name="toggled" handler="show_salat_times" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="checkbutton2">
+                <property name="label" translatable="yes">Show Time Now</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="xalign">0.5</property>
+                <property name="active">True</property>
+                <property name="draw_indicator">True</property>
+                <signal name="toggled" handler="show_time_now" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="checkbutton4">
+                <property name="label" translatable="yes">Show Statue Icon</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="xalign">0.5</property>
+                <property name="active">True</property>
+                <property name="draw_indicator">True</property>
+                <signal name="toggled" handler="view_statusicon" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+        <child type="tab">
+          <object class="GtkLabel" id="label12">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">General</property>
+          </object>
+          <packing>
+            <property name="tab_fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="box3">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <property name="homogeneous">True</property>
+            <child>
+              <object class="GtkLabel" id="label17">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Select Country:</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBox" id="combobox2">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="model">cont_list</property>
+                <signal name="changed" handler="country" swapped="no"/>
+                <child>
+                  <object class="GtkCellRendererText" id="cellrenderertext2"/>
+                  <attributes>
+                    <attribute name="text">0</attribute>
+                  </attributes>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label18">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Select City:</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBox" id="combobox1">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="model">sa_cities</property>
+                <signal name="changed" handler="city" swapped="no"/>
+                <signal name="changed" handler="salat_times" swapped="no"/>
+                <child>
+                  <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                  <attributes>
+                    <attribute name="text">0</attribute>
+                  </attributes>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button1">
+                <property name="label" translatable="yes">Set Pray Times Manual</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="show_set_time_manual" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">4</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child type="tab">
+          <object class="GtkLabel" id="label13">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Salat Times</property>
+          </object>
+          <packing>
+            <property name="position">1</property>
+            <property name="tab_fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="box4">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <property name="homogeneous">True</property>
+            <child>
+              <object class="GtkCheckButton" id="checkbutton3">
+                <property name="label" translatable="yes">Enable Adan</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="xalign">0.5</property>
+                <property name="active">True</property>
+                <property name="draw_indicator">True</property>
+                <signal name="toggled" handler="enable_adan" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label20">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Select Adan Sound:</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBox" id="combobox3">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="model">adan_list</property>
+                <property name="active">0</property>
+                <signal name="changed" handler="changed_adan" swapped="no"/>
+                <child>
+                  <object class="GtkCellRendererText" id="cellrenderertext4"/>
+                  <attributes>
+                    <attribute name="text">0</attribute>
+                  </attributes>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child type="tab">
+          <object class="GtkLabel" id="label14">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Adan</property>
+          </object>
+          <packing>
+            <property name="position">2</property>
+            <property name="tab_fill">False</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkListStore" id="sd_cities">
+    <columns>
+      <!-- column-name City -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Atbara</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Kassala</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Khartoum</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Kosti</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Port Sudan</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkStatusIcon" id="statusicon1">
+    <property name="pixbuf">icon.jpg</property>
+    <property name="has_tooltip">True</property>
+    <property name="tooltip_text" translatable="yes">Pray Times</property>
+    <property name="title" translatable="yes">Pray Times</property>
+    <signal name="activate" handler="show_program" swapped="no"/>
+    <signal name="popup-menu" handler="right" swapped="no"/>
+  </object>
+  <object class="GtkListStore" id="sy_cities">
+    <columns>
+      <!-- column-name City -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Damascus</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Aleppo</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Hama</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Hasakeh</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Homs</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Rakka</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Tartous</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Al Ladhiqiyah</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="tn_cities">
+    <columns>
+      <!-- column-name City -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Ariana</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Djerba</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Gabes</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Kairouan</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Sfax</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Sousse</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Tunis</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkWindow" id="window1">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Pray Times</property>
+    <property name="window_position">center</property>
+    <property name="default_width">300</property>
+    <property name="default_height">150</property>
+    <property name="icon">icon.jpg</property>
+    <signal name="delete-event" handler="delete_event" swapped="no"/>
+    <signal name="destroy-event" handler="delete_event" swapped="no"/>
+    <child>
+      <object class="GtkBox" id="box1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkMenuBar" id="menubar1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkMenuItem" id="menuitem1">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">_File</property>
+                <property name="use_underline">True</property>
+                <child type="submenu">
+                  <object class="GtkMenu" id="menu1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkImageMenuItem" id="quit_item">
+                        <property name="label">gtk-quit</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                        <property name="always_show_image">True</property>
+                        <signal name="activate" handler="quit" swapped="no"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="menuitem2">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">_Edit</property>
+                <property name="use_underline">True</property>
+                <child type="submenu">
+                  <object class="GtkMenu" id="menu2">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkImageMenuItem" id="settings_item">
+                        <property name="label">gtk-preferences</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                        <property name="always_show_image">True</property>
+                        <signal name="activate" handler="run_settings" swapped="no"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="menuitem4">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">_Help</property>
+                <property name="use_underline">True</property>
+                <child type="submenu">
+                  <object class="GtkMenu" id="menu3">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkImageMenuItem" id="about_item">
+                        <property name="label">gtk-about</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                        <property name="always_show_image">True</property>
+                        <signal name="activate" handler="run_about" swapped="no"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkGrid" id="grid1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="row_spacing">5</property>
+            <property name="row_homogeneous">True</property>
+            <property name="column_homogeneous">True</property>
+            <child>
+              <object class="GtkLabel" id="label1">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Salat Al Fajr:</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label2">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">N/A</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label3">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Salat Al Duhur:</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label4">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">N/A</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label5">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Salat Al Asr:</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label6">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">N/A</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label7">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Salat Al Maghrib:</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label8">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">N/A</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label9">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Salat Al Isha:</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">6</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label10">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">N/A</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">6</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label16">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Salat Times</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label25">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Next Salat:</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">7</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label26">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">label</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">7</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label27">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Sunrise:</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label28">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">label</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label11">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">
+Time Now:
+</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label30">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Hijri Date:</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label31">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">
+Gregorian Date:</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">4</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkWindow" id="window3">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Set Salat Time Manual - Pray Times</property>
+    <property name="window_position">center</property>
+    <property name="default_width">300</property>
+    <property name="default_height">150</property>
+    <property name="icon">icon.jpg</property>
+    <signal name="delete-event" handler="delete_event2" swapped="no"/>
+    <signal name="destroy-event" handler="delete_event2" swapped="no"/>
+    <child>
+      <object class="GtkGrid" id="grid2">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="row_homogeneous">True</property>
+        <property name="column_homogeneous">True</property>
+        <child>
+          <object class="GtkLabel" id="label15">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Enter Salat Al Fajr Time:</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="entry1">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label19">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Enter Salat Al Duhur Time:</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="entry2">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label21">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Enter Salat Al Asr Time:</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="entry3">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label22">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Enter Salat Al Maghrib Time:</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="entry4">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label23">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Enter Salat Al Isha Time:</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="entry5">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label24">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Errors Here</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">6</property>
+            <property name="width">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button2">
+            <property name="label">gtk-save</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_stock">True</property>
+            <property name="always_show_image">True</property>
+            <signal name="clicked" handler="save_set_time_manual" swapped="no"/>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">7</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button3">
+            <property name="label">gtk-close</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_stock">True</property>
+            <property name="always_show_image">True</property>
+            <signal name="clicked" handler="delete_event2" swapped="no"/>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">7</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label29">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Enter Sunrise Time:</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="entry6">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkListStore" id="ye_cities">
+    <columns>
+      <!-- column-name City -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Aden</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Dhamar</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Mukalla</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Sanaa</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Taiz</col>
+      </row>
+    </data>
+  </object>
+</interface>
