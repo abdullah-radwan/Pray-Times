@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+
 # compatible with python 2.x and 3.x
 
 import math
