@@ -1,7 +1,7 @@
 # Introduction
 Pray Times is a program give pray times, sunrise time. Build on Python & Gtk & Pyglet.
 # Requirements
-Python 3.5, GTK + 3.12, Pyglet.
+Python 3.5, GTK + 3.12, Pyglet, Python-umalqurra.
 # Build & Install
 Just install the requirements and run PrayTimes.py
 # Reference
