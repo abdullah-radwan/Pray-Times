@@ -21,7 +21,7 @@ To install the program on fedora, apply these commands:
 
 `git clone https://github.com/tytkal/python-hijiri-ummalqura`
 
-`mv python-hijiri-ummalqura/umalqurra/`
+`mv python-hijiri-ummalqura/umalqurra/ .`
 
 `./PrayTimesAr.py` for arabic, `./PrayTimesEn.py` for english.
 # Reference
