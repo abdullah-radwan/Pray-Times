@@ -33,24 +33,22 @@ from gi.repository import Gtk, GObject, Notify
 
 from umalqurra.hijri_date import HijriDate
 
-import time, PrayTimesLib, datetime, pyglet
+import time, PrayTimesLib, datetime, pyglet, configparser
 
-# استيراد ملف الواجهة الرسومية
+# استيراد ملف Glade
 
 builder = Gtk.Builder()
 
 builder.add_from_file("PrayTimesAr.glade")
 
-
 # الفئة الرئيسية
+
 
 class SalatTimes():
 
-    # التهيئة
+    # دالة البداية
 
     def __init__(self):
-
-        # تعريف الكائنات الرئيسية
 
         self.builder = builder
 
@@ -278,12 +276,21 @@ class SalatTimes():
 
         self.sunrise_label = builder.get_object("label28")
 
-        self.ger_date = builder.get_object("label31")
+        self.gr_date_label = builder.get_object("label31")
 
-        self.hej_date = builder.get_object("label30")
+        self.hj_date_label = builder.get_object("label30")
 
+        self.hj_date_check = builder.get_object("checkbutton5")
 
-      # ضبط الإعدادات الافتراضية
+        self.gr_date_check = builder.get_object("checkbutton6")
+
+        self.time_now_check = builder.get_object("checkbutton2")
+
+        self.salat_times_check = builder.get_object("checkbutton1")
+
+        self.status_icon_check = builder.get_object("checkbutton4")
+
+        self.adan_check = builder.get_object("checkbutton3")
 
         self.times = self.calc_times.getTimes((self.data), (26.085478,
                                                             43.9768123), +3)
@@ -309,7 +316,7 @@ class SalatTimes():
 
         self.status_icon.set_title("مواقيت الصلاة")
 
-        self.main_win.show_all()
+        self.read_config()
 
         GObject.timeout_add_seconds(1, self.adan)
 
@@ -321,6 +328,8 @@ class SalatTimes():
     # دالة تعطيل أو تفعيل الأذان
 
     def enable_adan(self, widget):
+
+        self.adan_check = widget
 
         if widget.get_active():
 
@@ -342,10 +351,6 @@ class SalatTimes():
 
     def next_salat(self):
 
-        f = time.strptime("2 " + self.salat_time["صلاة الفجر"], "%d %H:%M")
-
-        f1 = time.strptime(self.salat_time["صلاة الفجر"], "%H:%M")
-
         d = time.strptime(self.salat_time["صلاة الظهر"], "%H:%M")
 
         a = time.strptime(self.salat_time["صلاة العصر"], "%H:%M")
@@ -354,13 +359,23 @@ class SalatTimes():
 
         i = time.strptime(self.salat_time["صلاة العشاء"], "%H:%M")
 
-        t = time.strptime(time.strftime("%H:%M"), "%H:%M")
+        h = time.strptime('23:59:00', "%H:%M:%S")
+
+        t = time.strptime(time.strftime("%H:%M:%S"), "%H:%M:%S")
+
+        if t < h:
+
+            f = time.strptime(self.salat_time["صلاة الفجر"], "%H:%M")
+
+        else:
+
+            f = time.strptime("2 " + self.salat_time["صلاة الفجر"], "%d %H:%M")
 
         if (t < f) and (t > i):
 
             self.eta = "صلاة الفجر"
 
-        elif (t > f1) and (t < d):
+        elif (t > f) and (t < d):
 
             self.eta = "صلاة الظهر"
 
@@ -386,7 +401,7 @@ class SalatTimes():
 
     # دالة تغيير الأذان
 
-    def changed_adan(self, widget):
+    def change_adan_sound(self, widget):
 
         adansound = widget.get_active_iter()
 
@@ -442,9 +457,9 @@ class SalatTimes():
 
                 um = HijriDate(int(time.strftime("%Y")), int(time.strftime("%m")), int(time.strftime("%d")), gr=True)
 
-                self.hej_date.set_text("\nالتاريخ الهجري: %s/%s/%s" % (int(um.year), int(um.month), int(um.day)))
+                self.hj_date_label.set_text("\nالتاريخ الهجري: %s/%s/%s" % (int(um.year), int(um.month), int(um.day)))
 
-                self.ger_date.set_text("\nالتاريخ الميلادي: %s" %(time.strftime(("%Y/%m/%d"))))
+                self.gr_date_label.set_text("\nالتاريخ الميلادي: %s" %(time.strftime(("%Y/%m/%d"))))
 
         else:
 
@@ -452,9 +467,9 @@ class SalatTimes():
 
             um = HijriDate(int(time.strftime("%Y")), int(time.strftime("%m")), int(time.strftime("%d")), gr=True)
 
-            self.hej_date.set_text("\nالتاريخ الهجري: %s/%s/%s" % (int(um.year), int(um.month), int(um.day)))
+            self.hj_date_label.set_text("\nالتاريخ الهجري: %s/%s/%s" % (int(um.year), int(um.month), int(um.day)))
 
-            self.ger_date.set_text("\nالتاريخ الميلادي: %s" % (time.strftime(("%Y/%m/%d"))))
+            self.gr_date_label.set_text("\nالتاريخ الميلادي: %s" % (time.strftime(("%Y/%m/%d"))))
 
         return True
 
@@ -463,6 +478,8 @@ class SalatTimes():
     # خيار عرض الوقت الحالي
 
     def show_time_now(self, widget):
+
+        self.time_now_check = widget
 
         if widget.get_active():
 
@@ -478,13 +495,11 @@ class SalatTimes():
 
     def show_salat_times(self, widget):
 
-        if widget.get_active():
+        self.salat_times_check = widget
 
-            self.salat_times_grid.show()
+        if widget.get_active(): self.salat_times_grid.show()
 
-        else:
-
-            self.salat_times_grid.hide()
+        else: self.salat_times_grid.hide()
 
 
 
@@ -514,10 +529,10 @@ class SalatTimes():
 
         model = widget.get_model()
 
-        name = model[city][0]
+        self.city_name = model[city][0]
 
-        self.times = self.calc_times.getTimes((self.data), (self.cities[name][0], self.cities[name][1]),
-                                              self.cities[name][2])
+        self.times = self.calc_times.getTimes((self.data), (self.cities[self.city_name][0], self.cities[self.city_name][1]),
+                                              self.cities[self.city_name][2])
 
         if self.calc_times.getMethod() == "Makkah":
 
@@ -558,6 +573,7 @@ class SalatTimes():
                                "صلاة العصر": self.times["asr"], "صلاة المغرب": self.times["maghrib"],
 
                                "صلاة العشاء": self.times["isha"]}
+
 
 
 
@@ -635,11 +651,17 @@ class SalatTimes():
 
         show_window = Gtk.MenuItem("اعرض النافذة الرئيسية")
 
-        show_settings_window = Gtk.MenuItem("الإعدادات")
+        show_settings_window = Gtk.ImageMenuItem.new_from_stock(Gtk.STOCK_PREFERENCES)
 
-        about_program = Gtk.MenuItem("حول البرنامج")
+        show_settings_window.set_always_show_image(True)
 
-        quit_program = Gtk.MenuItem("اخرج")
+        about_program = Gtk.ImageMenuItem.new_from_stock(Gtk.STOCK_ABOUT)
+
+        about_program.set_always_show_image(True)
+
+        quit_program = Gtk.ImageMenuItem.new_from_stock(Gtk.STOCK_CLOSE)
+
+        quit_program.set_always_show_image(True)
 
         show_window.connect_object("activate", self.show_program, "اعرض النافذة الرئيسية")
 
@@ -647,7 +669,7 @@ class SalatTimes():
 
         about_program.connect_object('activate', self.run_about, "حول البرنامج")
 
-        quit_program.connect_object("activate", Gtk.main_quit, "اخرج")
+        quit_program.connect_object("activate", self.quit, "اخرج")
 
         self.menu2.append(show_window)
 
@@ -671,9 +693,7 @@ class SalatTimes():
 
     def view_statusicon(self, widget):
 
-        if widget.get_active():
-
-            self.status_icon.set_visible(True)
+        if widget.get_active(): self.status_icon.set_visible(True)
 
         else:
 
@@ -701,11 +721,178 @@ class SalatTimes():
 
         return True
 
+    def show_hijri_date(self, widget):
+
+        self.hj_date_check = widget
+
+        if widget.get_active(): self.hj_date_label.show()
+
+        else: self.hj_date_label.hide()
+
+    def show_greg_date(self, widget):
+
+        self.gr_date_check = widget
+
+        if widget.get_active(): self.gr_date_label.show()
+
+        else: self.gr_date_label.hide()
+
+    def read_config(self):
+
+        self.gr_date_label.show()
+
+        config = configparser.RawConfigParser()
+
+        config.read("config.cfg")
+
+        config1 = config.read("config.cfg")
+
+        if config1 == []:
+
+            return None
+
+        else:
+
+            self.data = [int(time.strftime("%Y")), int(time.strftime("%m")), int(time.strftime("%d"))]
+
+            self.times = self.calc_times.getTimes((self.data), (self.cities[config.get("Settings","City")][0],
+                                                  self.cities[config.get("Settings", "City")][1]), self.cities[config.get("Settings", "City")][2])
+
+            if config.get("Settings", "Method") == "Makkah":
+
+                um = HijriDate(int(time.strftime("%Y")), int(time.strftime("%m")), int(time.strftime("%d")), gr=True)
+
+                if um.month == 9.0:
+
+                    hours = 2
+
+                    minutes = 0
+
+                else:
+
+                    hours = 1
+
+                    minutes = 30
+
+                m = datetime.datetime.strptime(self.times["maghrib"], "%H:%M")
+
+                add_min = m + datetime.timedelta(hours=hours, minutes=minutes)
+
+                salat_isha = str(add_min.strftime("%H:%M"))
+
+                self.sunrise_time = self.times["sunrise"]
+
+                self.salat_time = {"صلاة الفجر": self.times["fajr"], "صلاة الظهر": self.times["dhuhr"],
+
+                                   "صلاة العصر": self.times["asr"], "صلاة المغرب": self.times["maghrib"],
+
+                                   "صلاة العشاء": salat_isha}
+
+            else:
+
+                self.sunrise_time = self.times["sunrise"]
+
+                self.salat_time = {"صلاة الفجر": self.times["fajr"], "صلاة الظهر": self.times["dhuhr"],
+
+                                   "صلاة العصر": self.times["asr"], "صلاة المغرب": self.times["maghrib"],
+
+                                   "صلاة العشاء": self.times["isha"]}
+
+            self.adan_sound = config.get("Settings", "AdanSound")
+
+            if config.get("Settings", "ShowSalatTimes") == "True": self.salat_times_grid.show()
+
+            else:
+
+                self.salat_times_grid.hide()
+
+                self.salat_times_check.set_active(False)
+
+            if config.get("Settings", "ShowTimeNow") == "True": self.time_label.show()
+
+            else:
+
+                self.time_label.hide()
+
+                self.time_now_check.set_active(False)
+
+            if config.get("Settings", "ShowHijriDate") == "True": self.hj_date_label.show()
+
+            else:
+
+                self.hj_date_label.hide()
+
+                self.hj_date_check.set_active(False)
+
+            if config.get("Settings", "ShowGregorianDate") == "True": self.gr_date_label.show()
+
+            else:
+
+                self.gr_date_label.hide()
+
+                self.gr_date_check.set_active(False)
+
+            if config.get("Settings", "ShowStatusIcon") == "True":  self.status_icon.set_visible(True)
+
+            else:
+
+                self.status_icon.set_visible(False)
+
+                self.status_icon_check.set_active(False)
+
+            if config.get("Settings", "Adan") == "True": self.adan_set = True
+
+            else:
+
+                self.adan_set = False
+
+                self.adan_check.set_active(False)
+
+            self.salat_times()
+
+            self.city_name = config.get("Settings", "City")
+
+            self.main_win.show_all()
+
+
+
+    # Write Config File
+
+    def write_config(self):
+
+        config = configparser.RawConfigParser()
+
+        config.add_section('Settings')
+
+        config.set('Settings', 'City', self.city_name)
+
+        config.set("Settings", "Adan", self.adan_set)
+
+        config.set("Settings", "AdanSound", self.adan_sound)
+
+        config.set("Settings", "ShowSalatTimes", self.salat_times_check.get_active())
+
+        config.set("Settings", "ShowTimeNow", self.time_now_check.get_active())
+
+        config.set("Settings", "ShowHijriDate", self.hj_date_check.get_active())
+
+        config.set("Settings", "ShowGregorianDate", self.gr_date_check.get_active())
+
+        config.set("Settings", "Method", self.calc_times.getMethod())
+
+        config.set("Settings", "ShowStatusIcon", self.status_icon.get_visible())
+
+        with open('config.cfg', 'wt') as configfile:
+
+            config.write(configfile)
+
 
 
     # دالة الخروج
 
-    def quit(self, widget):
+    def quit(self, widget = None):
+
+        self.write_config()
 
         Gtk.main_quit()
 
@@ -720,6 +907,8 @@ class SalatTimes():
             self.main_win.hide_on_delete()
 
         else:
+
+            self.write_config()
 
             Gtk.main_quit()
 

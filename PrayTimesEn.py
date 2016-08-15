@@ -33,7 +33,7 @@ from gi.repository import Gtk, GObject, Notify
 
 from umalqurra.hijri_date import HijriDate
 
-import time, PrayTimesLib, datetime, pyglet
+import time, PrayTimesLib, datetime, pyglet, configparser
 
 # Import Glade File
 
@@ -91,148 +91,289 @@ class SalatTimes:
         self.eg = builder.get_object("eg_cities")
 
         self.countries = {
+
             "Egypt": [self.eg, "Egypt"],
+
             "Saudi Arabia": [self.sa, "Makkah"],
+
             "United Arabic Emirates": [self.ae, "Makkah"],
+
             "Oman": [self.om, "Makkah"],
+
             "Yemen": [self.ye, "Makkah"],
+
             "Qatar": [self.qa, "Makkah"],
+
             "Bahrain": [self.bh, "Makkah"],
+
             "Kuwait": [self.kw, "Makkah"],
+
             "Iraq": [self.iq, "MWL"],
+
             "Jordan": [self.jo, "Makkah"],
+
             "Syria": [self.sy, "Makkah"],
+
             "Lebanon": [self.lb, "MWL"],
+
             "Palestine": [self.ps, "MWL"],
+
             "Sudan": [self.sd, "Egypt"],
+
             "Libya": [self.ly, "Egypt"],
+
             "Tunisia": [self.tn, "MWL"],
+
             "Algeria": [self.dz, "Egypt"],
+
             "Morocco": [self.ma, "MWL"]
+
         }
 
         self.cities = {
+
             # Egypt
+
             "Cairo": [30.0500, 31.2500, +2],
+
             "Alexandria": [31.1981, 29.9192, +2],
+
             "Asyut": [27.1828, 31.1828, +2],
+
             "Port Said": [31.2667, 32.3000, +2],
+
             "Suez": [29.9667, 32.5500, +2],
+
             "Tanta": [30.7911, 30.9981, +2],
+
             # Saudi Arabia
+
             "Riyadh": [24.6700, 46.6900, +3],
+
             "Onaizah": [26.085478, 43.9768123, +3],
+
             "Madinah": [24.4527, 39.6667, +3],
+
             "Jeddah": [21.5169, 39.219, +3],
+
             "Dammam": [26.4400, 50.1000, +3],
+
             "Makkah": [21.4200, 39.8300, +3],
+
             "Hail": [27.5258717, 41.6748334, +3],
+
             "Abha": [18.2200, 42.5100, +3],
+
             "Al Jouf": [29.9029354, 40.1848983, +3],
+
             "Al Qurayyat": [31.316667, 37.366667, +3],
+
             "Najran": [17.48333, 44.11667, +3],
+
             "Taif": [21.2703, 40.4158, +3],
+
             "Al Baha": [20, 41.45, +3],
+
             "Buraidah": [26.3317, 43.9717, +3],
+
             "Jazan": [16.883333, 42.55, +3],
+
             "Tabuk": [28.3833, 36.5833, +3],
+
             "Hafr Al Batin": [28.4342, 45.9636, +3],
+
             "Al Khafji": [28.4403, 48.4844, +3],
+
             # United Arabic Emirates
+
             "Dubai": [25.2522, 55.2800, +4],
+
             "Abu Dhabi": [24.4500, 54.3833, +4],
+
             "Ajman": [25.4061, 55.4428, +4],
+
             "Ras al Khaima": [24.4500, 54.3833, +4],
+
             "Sharjah": [25.0000, 55.7500, +4],
+
             # Oman
+
             "Muscat": [23.6133, 58.5933, +4],
+
             "Salala": [17.0175, 54.0828, +4],
+
             # Yemen
+
             "Aden": [12.7667, 45.0167, +3],
+
             "Dhamar": [14.5500, 44.4017, +3],
+
             "Mukalla": [14.5300, 49.1314, +3],
+
             "Sanaa": [15.3547, 44.2067, +3],
+
             "Taiz": [13.5000, 44.0000],
+
             # Qatar
+
             "Doha": [25.2867, 51.5333, +3],
+
             # Bahrain
+
             "Manama": [26.2361, 50.5831, +3],
+
             # Kuwait
+
             "Kuwait": [29.5000, 47.7500, +3],
+
             "Al Jahara": [29.3375, 47.6581, +3],
+
             # Iraq
+
             "An Najaf": [31.9922, 44.3514, +3],
+
             "Baghdad": [33.3386, 44.3939, +3],
+
             "Basra": [30.5000, 47.8500, +3],
+
             "Erbil": [36.1900, 44.0089, +3],
+
             "Kufa": [32.0347, 44.4033, +3],
+
             "Mosul": [36.3350, 43.1189, +3],
+
             # Jordan
+
             "Amman": [31.9500, 35.9333, +3],
+
             "Irbid": [32.5556, 35.8500, +3],
+
             "Madaba": [31.7167, 35.8000, +3],
+
             # Syria
+
             "Al Ladhiqiyah": [35.5167, 35.7833, +3],
+
             "Aleppo": [36.2028, 37.1586, +3],
+
             "Damascus": [33.5000, 36.3000, +3],
+
             "Hama": [35.1333, 36.7500, +3],
+
             "Hasakeh": [36.5000, 41.0000, +3],
+
             "Homs": [34.7333, 36.7167, +3],
+
             "Rakka": [35.9500, 39.0167, +3],
+
             "Tartous": [34.8833, 35.8833, +3],
+
             # Lebanon
+
             "Akka": [34.4167, 36.2167, +3],
+
             "Baalbek": [34.0000, 36.2000, +3],
+
             "Beirut": [33.8719, 35.5097, +3],
+
             "Sidon": [33.5631, 35.3689, +3],
+
             "Tyre": [33.2711, 35.1964, +3],
+
             # Palestine
+
             "Elat": [29.5611, 34.9517, +3],
+
             "Gaza": [31.5000, 34.4667, +3],
+
             "Haifa": [32.8156, 34.9892, +3],
+
             "Tel Aviv": [32.0667, 34.7667, +3],
+
             # Sudan
+
             "Atbara": [17.7167, 34.0667, +3],
+
             "Kassala": [16.0000, 36.0000, +3],
+
             "Khartoum": [15.5881, 32.5342, +3],
+
             "Kosti": [13.1667, 32.6667, +3],
+
             "Port Sudan": [19.6158, 37.2164, +3],
+
             # Libya
+
             "Agedabia": [30.7592, 20.2231, +2],
+
             "Benghazi": [32.1167, 20.0667, +2],
+
             "Misurata": [32.3783, 15.0906, +2],
+
             "Sebha": [27.0333, 14.4333, +2],
+
             "Tripoli": [32.8925, 13.1800, +2],
+
             "Tubruq": [32.0836, 23.9764, +2],
+
             # Tunisia
+
             "Ariana": [36.8625, 10.1956, +1],
+
             "Djerba": [33.8747, 10.8592, +1],
+
             "Gabes": [33.8833, 10.1167, +1],
+
             "Kairouan": [35.6744, 10.1017, +1],
+
             "Sfax": [34.7406, 10.7603, +1],
+
             "Sousse": [35.8256, 10.6411, +1],
+
             "Tunis": [36.8028, 10.1797, +1],
+
             # Algeria
+
             "Algiers": [36.7631, 3.0506, +1],
+
             "Annaba": [36.9000, 7.7667, +1],
+
             "Bejaia": [36.7500, 5.0833, +1],
+
             "Blida": [36.4686, 2.8289, +1],
+
             "Constantine": [36.3650, 6.6147, +1],
+
             "Oran": [35.6911, -0.6417, +1],
+
             "Setif": [36.1914, 5.4094, +1],
+
             "Skikda": [36.8792, 6.9067, +1],
+
             "Tlemcen": [34.8783, -1.3150, +1],
+
             # Morocco
+
             "Agadir": [29.0167, -10.2500, +0],
+
             "Casablanca": [33.5931, -7.6164, +0],
+
             "Fez": [34.0528, -4.9828, +0],
+
             "Kenitra": [34.2608, -6.5794, +0],
+
             "Marrakech": [31.6333, -8.0000, +0],
+
             "Meknes": [33.9000, -5.5500, +0],
+
             "Oujda": [34.6867, -1.9114, +0],
+
             "Rabat": [34.0253, -6.8361, +0],
+
             "Safi": [32.3000, -9.2386, +0],
+
             "Tangier": [35.7847, -5.8128, +0],
+
         }
 
         self.main_win = builder.get_object("window1")
@@ -288,9 +429,21 @@ class SalatTimes:
 
         self.sunrise_label = builder.get_object("label28")
 
-        self.hj_date = builder.get_object("label30")
+        self.hj_date_label = builder.get_object("label30")
 
-        self.gr_date = builder.get_object("label31")
+        self.gr_date_label = builder.get_object("label31")
+
+        self.gr_date_check = builder.get_object("checkbutton6")
+
+        self.hj_date_check = builder.get_object("checkbutton5")
+
+        self.time_now_check = builder.get_object("checkbutton2")
+
+        self.salat_times_check = builder.get_object("checkbutton1")
+
+        self.status_icon_check = builder.get_object("checkbutton4")
+
+        self.adan_check = builder.get_object("checkbutton3")
 
         # Set default parameters
 
@@ -316,7 +469,7 @@ class SalatTimes:
 
         self.next_salat()
 
-        self.main_win.show_all()
+        self.read_config()
 
         GObject.timeout_add_seconds(1, self.adan)
 
@@ -326,7 +479,9 @@ class SalatTimes:
 
     # Enable or disable adan function
 
-    def enable_adan(self, widget):
+    def enable_adan(self, widget = None):
+
+        self.adan_check = widget
 
         if widget.get_active():
 
@@ -358,19 +513,22 @@ class SalatTimes:
 
         i = time.strptime(self.salat_time["Salat Al Isha"], "%H:%M")
 
-        t = time.strptime(time.strftime("%H:%M"), "%H:%M")
+        t = time.strptime(time.strftime("%H:%M:%S"), "%H:%M:%S")
 
-        h = time.strptime('23:59', "%H:%M")
+        h = time.strptime('23:59:00', "%H:%M:%S")
 
-        f = time.strptime("2 " + self.salat_time["Salat Al Fajr"], "%d %H:%M")
+        if t < h:
+            f = time.strptime(self.salat_time["Salat Al Fajr"], "%H:%M")
 
-        f1 = time.strptime(self.salat_time["Salat Al Fajr"], "%H:%M")
+        else:
+
+            f = time.strptime("2 " + self.salat_time["Salat Al Fajr"], "%d %H:%M")
 
         if (t < f) and (t > i):
 
             self.eta = "Salat Al Fajr"
 
-        elif (t > f1) and (t < d):
+        elif (t > f) and (t < d):
 
             self.eta = "Salat Al Duhur"
 
@@ -455,9 +613,9 @@ class SalatTimes:
 
                 um = HijriDate(int(time.strftime("%Y")), int(time.strftime("%m")), int(time.strftime("%d")), gr=True)
 
-                self.hj_date.set_text("\nHijri Date: %s/%s/%s" % (int(um.year), int(um.month), int(um.day)))
+                self.hj_date_label.set_text("\nHijri Date: %s/%s/%s" % (int(um.year), int(um.month), int(um.day)))
 
-                self.gr_date.set_text("\nGregorian Date: %s" % (time.strftime(("%Y/%m/%d"))))
+                self.gr_date_label.set_text("\nGregorian Date: %s" % (time.strftime(("%Y/%m/%d"))))
 
         else:
 
@@ -466,10 +624,11 @@ class SalatTimes:
         return True
 
 
-
     # Show time now option
 
     def show_time_now(self, widget):
+
+        self.time_now_check = widget
 
         if widget.get_active():
 
@@ -480,10 +639,11 @@ class SalatTimes:
             self.time_label.hide()
 
 
-
     # Show salat times option
 
     def show_salat_times(self, widget):
+
+        self.salat_times_check = widget
 
         if widget.get_active():
 
@@ -493,6 +653,7 @@ class SalatTimes:
 
             self.salat_times_grid.hide()
 
+
     # Set cities
 
     def country(self, widget):
@@ -501,11 +662,11 @@ class SalatTimes:
 
         model = widget.get_model()
 
-        name = model[country][0]
+        self.country_name = model[country][0]
 
-        self.city_box.set_model(self.countries[name][0])
+        self.city_box.set_model(self.countries[self.country_name][0])
 
-        self.calc_times.setMethod(self.countries[name][1])
+        self.calc_times.setMethod(self.countries[self.country_name][1])
 
 
 
@@ -519,10 +680,10 @@ class SalatTimes:
 
         model = widget.get_model()
 
-        name = model[city][0]
+        self.city_name = model[city][0]
 
-        self.times = self.calc_times.getTimes((self.data), (self.cities[name][0], self.cities[name][1]),
-                                              self.cities[name][2])
+        self.times = self.calc_times.getTimes((self.data), (self.cities[self.city_name][0], self.cities[self.city_name][1]),
+                                              self.cities[self.city_name][2])
 
         if self.calc_times.getMethod() == "Makkah":
 
@@ -559,6 +720,7 @@ class SalatTimes:
             self.salat_time = {"Salat Al Fajr": self.times["fajr"], "Salat Al Duhur": self.times["dhuhr"],
                                "Salat Al Asr": self.times["asr"], "Salat Al Maghrib": self.times["maghrib"],
                                "Salat Al Isha": self.times["isha"]}
+
 
 
     # Show set salat times manual window
@@ -649,7 +811,7 @@ class SalatTimes:
 
         about_program.connect_object('activate', self.run_about, "About")
 
-        quit_program.connect_object("activate", Gtk.main_quit, "Quit")
+        quit_program.connect_object("activate", self.quit, "Quit")
 
         self.menu2.append(show_window)
 
@@ -701,13 +863,203 @@ class SalatTimes:
 
         self.isha_label.set_text(self.salat_time["Salat Al Isha"])
 
-        return True
+
+    # Show Hijri Date
+
+    def show_hijri_date(self,widget):
+
+        self.hj_date_check = widget
+
+        if widget.get_active():
+
+            self.hj_date_label.show()
+
+        else:
+
+            self.hj_date_label.hide()
 
 
+
+    # Show Gregorian Date
+
+    def show_greg_date(self, widget):
+
+        self.gr_date_check = widget
+
+        if widget.get_active():
+
+            self.gr_date_label.show()
+
+        else:
+
+            self.gr_date_label.hide()
+
+    # Read Config File
+
+    def read_config(self):
+
+        self.gr_date_label.show()
+
+        config = configparser.RawConfigParser()
+
+        config.read("config.cfg")
+
+        config1 = config.read("config.cfg")
+
+        if config1 == []:
+
+            return None
+
+        else:
+
+            self.data = [int(time.strftime("%Y")), int(time.strftime("%m")), int(time.strftime("%d"))]
+
+            self.times = self.calc_times.getTimes((self.data), (self.cities[config.get("Settings","City")][0],
+                                                  self.cities[config.get("Settings", "City")][1]), self.cities[config.get("Settings", "City")][2])
+
+            if config.get("Settings", "Method") == "Makkah":
+
+                um = HijriDate(int(time.strftime("%Y")), int(time.strftime("%m")), int(time.strftime("%d")), gr=True)
+
+                if um.month == 9.0:
+
+                    hours = 2
+
+                    minutes = 0
+
+                else:
+
+                    hours = 1
+
+                    minutes = 30
+
+                m = datetime.datetime.strptime(self.times["maghrib"], "%H:%M")
+
+                add_min = m + datetime.timedelta(hours=hours, minutes=minutes)
+
+                salat_isha = str(add_min.strftime("%H:%M"))
+
+                self.sunrise_time = self.times["sunrise"]
+
+                self.salat_time = {"Salat Al Fajr": self.times["fajr"], "Salat Al Duhur": self.times["dhuhr"],
+                                   "Salat Al Asr": self.times["asr"], "Salat Al Maghrib": self.times["maghrib"],
+                                   "Salat Al Isha": salat_isha}
+
+            else:
+
+                self.sunrise_time = self.times["sunrise"]
+
+                self.salat_time = {"Salat Al Fajr": self.times["fajr"], "Salat Al Duhur": self.times["dhuhr"],
+                                   "Salat Al Asr": self.times["asr"], "Salat Al Maghrib": self.times["maghrib"],
+                                   "Salat Al Isha": self.times["isha"]}
+
+            self.adan_sound = config.get("Settings", "Adan")
+
+            if config.get("Settings", "ShowSalatTimes") == "True": self.salat_times_grid.show()
+
+            else:
+
+                self.salat_times_grid.hide()
+
+                self.salat_times_check.set_active(False)
+
+            if config.get("Settings", "ShowTimeNow") == "True": self.time_label.show()
+
+            else:
+
+                self.time_label.hide()
+
+                self.time_now_check.set_active(False)
+
+            if config.get("Settings", "ShowHijriDate") == "True": self.hj_date_label.show()
+
+            else:
+
+                self.hj_date_label.hide()
+
+                self.hj_date_check.set_active(False)
+
+            if config.get("Settings", "ShowGregorianDate") == "True": self.gr_date_label.show()
+
+            else:
+
+                self.gr_date_label.hide()
+
+                self.gr_date_check.set_active(False)
+
+            if config.get("Settings", "ShowStatusIcon") == "True":  self.status_icon.set_visible(True)
+
+            else:
+
+                self.status_icon.set_visible(False)
+
+                self.status_icon_check.set_active(False)
+
+            if config.get("Settings", "Adan") == "True": self.adan_set = True
+
+            else:
+
+                self.adan_set = False
+
+                self.adan
+
+            self.salat_times()
+
+            self.city_name = config.get("Settings", "City")
+
+            self.main_win.show_all()
+
+    def show_hijri_date(self, widget):
+
+        self.hj_date_check = widget
+
+        if widget.get_active() : self.hj_date_label.show()
+
+        else: self.hj_date_label.hide()
+
+    def show_greg_date(self, widget):
+
+        self.gr_date_check = widget
+
+        if widget.get_active() : self.gr_date_label.show()
+
+        else: self.gr_date_label.hide()
+
+    # Write Config File
+
+    def write_config(self):
+
+        config = configparser.RawConfigParser()
+
+        config.add_section('Settings')
+
+        config.set('Settings', 'City', self.city_name)
+
+        config.set("Settings", "Adan", self.adan_set)
+
+        config.set("Settings", "AdanSound", self.adan_sound)
+
+        config.set("Settings", "ShowSalatTimes", self.salat_times_check.get_active())
+
+        config.set("Settings", "ShowTimeNow", self.time_now_check.get_active())
+
+        config.set("Settings", "ShowHijriDate", self.hj_date_check.get_active())
+
+        config.set("Settings", "ShowGregorianDate", self.gr_date_check.get_active())
+
+        config.set("Settings", "Method", self.calc_times.getMethod())
+
+        config.set("Settings", "ShowStatusIcon", self.status_icon.get_visible())
+
+        with open('config.cfg', 'wt') as configfile:
+
+            config.write(configfile)
 
     # Quit function
 
-    def quit(self, widget):
+    def quit(self, widget=None):
+
+        self.write_config()
 
         Gtk.main_quit()
 
@@ -723,10 +1075,11 @@ class SalatTimes:
 
         else:
 
-             Gtk.main_quit()
+            self.write_config()
+
+            Gtk.main_quit()
 
         return True
-
 
 
     def delete_event1(self, widget, data=None):
@@ -741,6 +1094,7 @@ class SalatTimes:
         self.pray_win.hide_on_delete()
 
         return True
+
 
 
 # Connect signals

@@ -529,6 +529,40 @@ Praytimes.org team</property>
               </packing>
             </child>
             <child>
+              <object class="GtkCheckButton" id="checkbutton5">
+                <property name="label" translatable="yes">Show Hijri Date</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="xalign">0</property>
+                <property name="active">True</property>
+                <property name="draw_indicator">True</property>
+                <signal name="toggled" handler="show_hijri_date" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="checkbutton6">
+                <property name="label" translatable="yes">Show Gregorian Date</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="xalign">0</property>
+                <property name="active">True</property>
+                <property name="draw_indicator">True</property>
+                <signal name="toggled" handler="show_greg_date" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkCheckButton" id="checkbutton4">
                 <property name="label" translatable="yes">Show Statue Icon</property>
                 <property name="use_action_appearance">False</property>
@@ -543,7 +577,7 @@ Praytimes.org team</property>
               <packing>
                 <property name="expand">True</property>
                 <property name="fill">True</property>
-                <property name="position">2</property>
+                <property name="position">4</property>
               </packing>
             </child>
           </object>
@@ -929,6 +963,7 @@ Praytimes.org team</property>
           <object class="GtkGrid" id="grid1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="no_show_all">True</property>
             <property name="row_spacing">5</property>
             <property name="row_homogeneous">True</property>
             <property name="column_homogeneous">True</property>
@@ -1107,11 +1142,12 @@ Praytimes.org team</property>
         </child>
         <child>
           <object class="GtkLabel" id="label11">
-            <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="no_show_all">True</property>
             <property name="label" translatable="yes">
 Time Now:
 </property>
+            <property name="angle">0.01</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -1123,6 +1159,7 @@ Time Now:
           <object class="GtkLabel" id="label30">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="no_show_all">True</property>
             <property name="label" translatable="yes">Hijri Date:</property>
           </object>
           <packing>
@@ -1135,6 +1172,7 @@ Time Now:
           <object class="GtkLabel" id="label31">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="no_show_all">True</property>
             <property name="label" translatable="yes">
 Gregorian Date:</property>
           </object>
