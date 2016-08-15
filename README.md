@@ -24,6 +24,13 @@ To install the program on fedora, apply these commands:
 `mv python-hijiri-ummalqura/umalqurra/ .`
 
 `./PrayTimesAr.py` for arabic, `./PrayTimesEn.py` for english.
+# Known Bugs
+When run the program for greater than one day, its give the pray times for the run day only. The timer solution is restart the program everyday.
+
+After 12 AM, the program give the next pray is unknown.
+
+When adan is started, you cannot stop it. The timer solution is close the program and open it again.
+
 # Reference
 Pray times calculation script http://praytimes.org/code/git/?a=tree&p=PrayTimes&hb=HEAD&f=v2/python. Adan http://praytimes.org/audio/. Coordinates from Islamic finder.
 
