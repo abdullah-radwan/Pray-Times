@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 
 # -*- coding: utf-8 -*-
 
@@ -27,9 +26,7 @@ import gi
 
 gi.require_version("Gtk", "3.0")
 
-gi.require_version("Notify", "0.7")
-
-from gi.repository import Gtk, GObject, Notify
+from gi.repository import Gtk, GObject
 
 from umalqurra.hijri_date import HijriDate
 
@@ -432,12 +429,6 @@ class SalatTimes():
             if now in self.salat_time.values():
 
                 if self.play_adan == False:
-                	
-                    Notify.init("برنامج مواقيت الصلاة")
-                    
-                    adan_notify = Notify.Notification.new("حان وقت الأذان", "بدأ الأذان", "dialog-information")
-                    
-                    adan_notify.show()
 
                     adan = pyglet.resource.media(self.adan_sound)
 
