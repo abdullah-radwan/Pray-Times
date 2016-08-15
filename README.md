@@ -25,7 +25,7 @@ To install the program on fedora, apply these commands:
 
 `./PrayTimesAr.py` for arabic, `./PrayTimesEn.py` for english.
 
-# Knows Bugs
+# Known Bugs
 When run the program for greater than one day, its give the pray times for the run day only. The timer solution is restart the program everyday.
 
 After 12 AM, the program give the next pray is unknown.
