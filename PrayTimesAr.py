@@ -314,8 +314,6 @@ class SalatTimes():
 
         self.next_salat()
 
-        self.status_icon.set_title("مواقيت الصلاة")
-
         self.read_config()
 
         GObject.timeout_add_seconds(1, self.adan)
@@ -721,6 +719,8 @@ class SalatTimes():
 
         return True
 
+    # عرض اللتاريخ الهجري
+
     def show_hijri_date(self, widget):
 
         self.hj_date_check = widget
@@ -728,6 +728,8 @@ class SalatTimes():
         if widget.get_active(): self.hj_date_label.show()
 
         else: self.hj_date_label.hide()
+
+    # عرض التاريخ الميلادي
 
     def show_greg_date(self, widget):
 
@@ -737,15 +739,19 @@ class SalatTimes():
 
         else: self.gr_date_label.hide()
 
+    # قراءة ملف الإعدادات
+
     def read_config(self):
+
+        self.main_win.show_all()
 
         self.gr_date_label.show()
 
         config = configparser.RawConfigParser()
 
-        config.read("config.cfg")
+        config.read("config-ar.cfg")
 
-        config1 = config.read("config.cfg")
+        config1 = config.read("config-ar.cfg")
 
         if config1 == []:
 
@@ -753,50 +759,60 @@ class SalatTimes():
 
         else:
 
-            self.data = [int(time.strftime("%Y")), int(time.strftime("%m")), int(time.strftime("%d"))]
+            try:
 
-            self.times = self.calc_times.getTimes((self.data), (self.cities[config.get("Settings","City")][0],
-                                                  self.cities[config.get("Settings", "City")][1]), self.cities[config.get("Settings", "City")][2])
+                self.data = [int(time.strftime("%Y")), int(time.strftime("%m")), int(time.strftime("%d"))]
 
-            if config.get("Settings", "Method") == "Makkah":
+                self.city_name = config.get("Settings","City")
 
-                um = HijriDate(int(time.strftime("%Y")), int(time.strftime("%m")), int(time.strftime("%d")), gr=True)
+                self.method = config.get("Settings", "Method")
 
-                if um.month == 9.0:
+                self.calc_times.setMethod(self.method)
 
-                    hours = 2
+                self.times = self.calc_times.getTimes((self.data), (self.cities[self.city_name][0],
+                                                  self.cities[self.city_name][1]), self.cities[self.city_name][2])
 
-                    minutes = 0
+                if self.method == "Makkah":
 
-                else:
+                    um = HijriDate(int(time.strftime("%Y")), int(time.strftime("%m")), int(time.strftime("%d")), gr=True)
 
-                    hours = 1
+                    if um.month == 9.0:
 
-                    minutes = 30
+                        hours = 2
 
-                m = datetime.datetime.strptime(self.times["maghrib"], "%H:%M")
+                        minutes = 0
 
-                add_min = m + datetime.timedelta(hours=hours, minutes=minutes)
+                    else:
 
-                salat_isha = str(add_min.strftime("%H:%M"))
+                        hours = 1
 
-                self.sunrise_time = self.times["sunrise"]
+                        minutes = 30
 
-                self.salat_time = {"صلاة الفجر": self.times["fajr"], "صلاة الظهر": self.times["dhuhr"],
+                    m = datetime.datetime.strptime(self.times["maghrib"], "%H:%M")
+
+                    add_min = m + datetime.timedelta(hours=hours, minutes=minutes)
+
+                    salat_isha = str(add_min.strftime("%H:%M"))
+
+                    self.sunrise_time = self.times["sunrise"]
+
+                    self.salat_time = {"صلاة الفجر": self.times["fajr"], "صلاة الظهر": self.times["dhuhr"],
 
                                    "صلاة العصر": self.times["asr"], "صلاة المغرب": self.times["maghrib"],
 
                                    "صلاة العشاء": salat_isha}
 
-            else:
+                else:
 
-                self.sunrise_time = self.times["sunrise"]
+                    self.sunrise_time = self.times["sunrise"]
 
-                self.salat_time = {"صلاة الفجر": self.times["fajr"], "صلاة الظهر": self.times["dhuhr"],
+                    self.salat_time = {"صلاة الفجر": self.times["fajr"], "صلاة الظهر": self.times["dhuhr"],
 
                                    "صلاة العصر": self.times["asr"], "صلاة المغرب": self.times["maghrib"],
 
                                    "صلاة العشاء": self.times["isha"]}
+
+            except: pass
 
             self.adan_sound = config.get("Settings", "AdanSound")
 
@@ -848,15 +864,14 @@ class SalatTimes():
 
                 self.adan_check.set_active(False)
 
+                self.adan_label.hide()
+
+                self.adan_box.hide()
+
             self.salat_times()
 
-            self.city_name = config.get("Settings", "City")
 
-            self.main_win.show_all()
-
-
-
-    # Write Config File
+    # كتابة ملف الإعدادات
 
     def write_config(self):
 
@@ -864,7 +879,9 @@ class SalatTimes():
 
         config.add_section('Settings')
 
-        config.set('Settings', 'City', self.city_name)
+        try: config.set('Settings', 'City', self.city_name)
+
+        except: pass
 
         config.set("Settings", "Adan", self.adan_set)
 
@@ -882,10 +899,55 @@ class SalatTimes():
 
         config.set("Settings", "ShowStatusIcon", self.status_icon.get_visible())
 
-        with open('config.cfg', 'wt') as configfile:
+        with open('config-ar.cfg', 'wt') as configfile:
 
             config.write(configfile)
 
+    # إعادة ضبط الإعدادات
+
+    def reset_config(self, widget = None):
+
+        config = configparser.RawConfigParser()
+
+        config.add_section('Settings')
+
+        config.set('Settings', 'City', "عنيزة")
+
+        config.set("Settings", "Adan", "True")
+
+        config.set("Settings", "AdanSound", "Makkah")
+
+        config.set("Settings", "ShowSalatTimes", "True")
+
+        config.set("Settings", "ShowTimeNow", "True")
+
+        config.set("Settings", "ShowHijriDate", "True")
+
+        config.set("Settings", "ShowGregorianDate", "True")
+
+        config.set("Settings", "Method", "Makkah")
+
+        config.set("Settings", "ShowStatusIcon", "True")
+
+        self.salat_times_grid.show()
+
+        self.salat_times_check.set_active(True)
+
+        self.time_label.show()
+
+        self.time_now_check.set_active(True)
+
+        self.hj_date_label.show()
+
+        self.hj_date_check.set_active(True)
+
+        self.gr_date_label.show()
+
+        self.gr_date_check.set_active(True)
+
+        self.status_icon.set_visible(True)
+
+        self.status_icon_check.set_active(True)
 
 
     # دالة الخروج

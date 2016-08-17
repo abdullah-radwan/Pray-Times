@@ -445,6 +445,8 @@ class SalatTimes:
 
         self.adan_check = builder.get_object("checkbutton3")
 
+        self.adan_label = builder.get_object("label20")
+
         # Set default parameters
 
         self.times = self.calc_times.getTimes((self.data), (26.085478, 43.9768123), +3)
@@ -517,18 +519,15 @@ class SalatTimes:
 
         h = time.strptime('23:59:00', "%H:%M:%S")
 
-        if t < h:
-            f = time.strptime(self.salat_time["Salat Al Fajr"], "%H:%M")
+        f1 = time.strptime(self.salat_time["Salat Al Fajr"], "%H:%M")
 
-        else:
-
-            f = time.strptime("2 " + self.salat_time["Salat Al Fajr"], "%d %H:%M")
+        f = time.strptime("2 " + self.salat_time["Salat Al Fajr"], "%d %H:%M")
 
         if (t < f) and (t > i):
 
             self.eta = "Salat Al Fajr"
 
-        elif (t > f) and (t < d):
+        elif (t > f1) and (t < d):
 
             self.eta = "Salat Al Duhur"
 
@@ -556,7 +555,7 @@ class SalatTimes:
 
     # Change adan function
 
-    def changed_adan(self, widget):
+    def change_adan_sound(self, widget):
 
         adansound = widget.get_active_iter()
 
@@ -581,6 +580,7 @@ class SalatTimes:
     # Adan function
 
     def adan(self):
+
         if self.adan_set == True:
 
             now = time.strftime("%H:%M")
@@ -588,7 +588,7 @@ class SalatTimes:
             if now in self.salat_time.values():
 
                 if self.play_adan == False:
-                	
+
                     Notify.init("Pray Times Program")
                     
                     adan_notify = Notify.Notification.new("Adan Now", "Adan Started", "dialog-information")
@@ -619,7 +619,13 @@ class SalatTimes:
 
         else:
 
-            self.time_label.set_text("\nTime Now: %s\n\nDate Today: %s" % (time.strftime("%H:%M:%S"), (time.strftime("%Y/%m/%d"))))
+            self.time_label.set_text("\nTime Now: %s" % (time.strftime("%H:%M:%S")))
+
+            um = HijriDate(int(time.strftime("%Y")), int(time.strftime("%m")), int(time.strftime("%d")), gr=True)
+
+            self.hj_date_label.set_text("\nHijri Date: %s/%s/%s" % (int(um.year), int(um.month), int(um.day)))
+
+            self.gr_date_label.set_text("\nGregorian Date: %s" % (time.strftime(("%Y/%m/%d"))))
 
         return True
 
@@ -898,13 +904,13 @@ class SalatTimes:
 
     def read_config(self):
 
-        self.gr_date_label.show()
+        self.main_win.show_all()
 
         config = configparser.RawConfigParser()
 
-        config.read("config.cfg")
+        config.read("config-en.cfg")
 
-        config1 = config.read("config.cfg")
+        config1 = config.read("config-en.cfg")
 
         if config1 == []:
 
@@ -912,48 +918,57 @@ class SalatTimes:
 
         else:
 
-            self.data = [int(time.strftime("%Y")), int(time.strftime("%m")), int(time.strftime("%d"))]
+            try:
 
-            self.times = self.calc_times.getTimes((self.data), (self.cities[config.get("Settings","City")][0],
-                                                  self.cities[config.get("Settings", "City")][1]), self.cities[config.get("Settings", "City")][2])
+                self.data = [int(time.strftime("%Y")), int(time.strftime("%m")), int(time.strftime("%d"))]
 
-            if config.get("Settings", "Method") == "Makkah":
+                self.city_name = config.get("Settings","City")
 
-                um = HijriDate(int(time.strftime("%Y")), int(time.strftime("%m")), int(time.strftime("%d")), gr=True)
+                self.method = config.get("Settings", "Method")
 
-                if um.month == 9.0:
+                self.calc_times.setMethod(self.method)
 
-                    hours = 2
+                self.times = self.calc_times.getTimes((self.data), (self.cities[self.city_name][0],
+                                                  self.cities[self.city_name][1]), self.cities[self.city_name][2])
 
-                    minutes = 0
+                if self.method == "Makkah":
 
-                else:
+                    um = HijriDate(int(time.strftime("%Y")), int(time.strftime("%m")), int(time.strftime("%d")), gr=True)
 
-                    hours = 1
+                    if um.month == 9.0:
 
-                    minutes = 30
+                        hours = 2
 
-                m = datetime.datetime.strptime(self.times["maghrib"], "%H:%M")
+                        minutes = 0
 
-                add_min = m + datetime.timedelta(hours=hours, minutes=minutes)
+                    else:
 
-                salat_isha = str(add_min.strftime("%H:%M"))
+                        hours = 1
 
-                self.sunrise_time = self.times["sunrise"]
+                        minutes = 30
 
-                self.salat_time = {"Salat Al Fajr": self.times["fajr"], "Salat Al Duhur": self.times["dhuhr"],
+                    m = datetime.datetime.strptime(self.times["maghrib"], "%H:%M")
+
+                    add_min = m + datetime.timedelta(hours=hours, minutes=minutes)
+
+                    salat_isha = str(add_min.strftime("%H:%M"))
+
+                    self.sunrise_time = self.times["sunrise"]
+
+                    self.salat_time = {"Salat Al Fajr": self.times["fajr"], "Salat Al Duhur": self.times["dhuhr"],
                                    "Salat Al Asr": self.times["asr"], "Salat Al Maghrib": self.times["maghrib"],
                                    "Salat Al Isha": salat_isha}
 
-            else:
+                else:
 
-                self.sunrise_time = self.times["sunrise"]
+                    self.sunrise_time = self.times["sunrise"]
 
-                self.salat_time = {"Salat Al Fajr": self.times["fajr"], "Salat Al Duhur": self.times["dhuhr"],
+                    self.salat_time = {"Salat Al Fajr": self.times["fajr"], "Salat Al Duhur": self.times["dhuhr"],
                                    "Salat Al Asr": self.times["asr"], "Salat Al Maghrib": self.times["maghrib"],
                                    "Salat Al Isha": self.times["isha"]}
+            except: pass
 
-            self.adan_sound = config.get("Settings", "Adan")
+            self.adan_sound = config.get("Settings", "AdanSound")
 
             if config.get("Settings", "ShowSalatTimes") == "True": self.salat_times_grid.show()
 
@@ -1001,29 +1016,13 @@ class SalatTimes:
 
                 self.adan_set = False
 
-                self.adan
+                self.adan_check.set_active(False)
+
+                self.adan_box.hide()
+
+                self.adan_label.hide()
 
             self.salat_times()
-
-            self.city_name = config.get("Settings", "City")
-
-            self.main_win.show_all()
-
-    def show_hijri_date(self, widget):
-
-        self.hj_date_check = widget
-
-        if widget.get_active() : self.hj_date_label.show()
-
-        else: self.hj_date_label.hide()
-
-    def show_greg_date(self, widget):
-
-        self.gr_date_check = widget
-
-        if widget.get_active() : self.gr_date_label.show()
-
-        else: self.gr_date_label.hide()
 
     # Write Config File
 
@@ -1033,7 +1032,9 @@ class SalatTimes:
 
         config.add_section('Settings')
 
-        config.set('Settings', 'City', self.city_name)
+        try: config.set('Settings', 'City', self.city_name)
+
+        except: pass
 
         config.set("Settings", "Adan", self.adan_set)
 
@@ -1051,9 +1052,58 @@ class SalatTimes:
 
         config.set("Settings", "ShowStatusIcon", self.status_icon.get_visible())
 
+        with open('config-en.cfg', 'wt') as configfile:
+
+            config.write(configfile)
+
+    def reset_config(self, widget = None):
+
+        config = configparser.RawConfigParser()
+
+        config.add_section('Settings')
+
+        config.set('Settings', 'City', "Onaizah")
+
+        config.set("Settings", "Adan", "True")
+
+        config.set("Settings", "AdanSound", "Makkah")
+
+        config.set("Settings", "ShowSalatTimes", "True")
+
+        config.set("Settings", "ShowTimeNow", "True")
+
+        config.set("Settings", "ShowHijriDate", "True")
+
+        config.set("Settings", "ShowGregorianDate", "True")
+
+        config.set("Settings", "Method", "Makkah")
+
+        config.set("Settings", "ShowStatusIcon", "True")
+
         with open('config.cfg', 'wt') as configfile:
 
             config.write(configfile)
+
+        self.salat_times_grid.show()
+
+        self.salat_times_check.set_active(True)
+
+        self.time_label.show()
+
+        self.time_now_check.set_active(True)
+
+        self.hj_date_label.show()
+
+        self.hj_date_check.set_active(True)
+
+        self.gr_date_label.show()
+
+        self.gr_date_check.set_active(True)
+
+        self.status_icon.set_visible(True)
+
+        self.status_icon_check.set_active(True)
+
 
     # Quit function
 

@@ -8,7 +8,7 @@
     <property name="icon">icon.jpg</property>
     <property name="type_hint">dialog</property>
     <property name="program_name">Pray Times</property>
-    <property name="version">5.1</property>
+    <property name="version">5.1.1</property>
     <property name="copyright" translatable="yes">Copyright (C) Abdullah Radwan
 Copyright (C) Praytimes.org team</property>
     <property name="comments" translatable="yes">A simple program to get salat time.</property>
@@ -580,6 +580,20 @@ Praytimes.org team</property>
                 <property name="position">4</property>
               </packing>
             </child>
+            <child>
+              <object class="GtkButton" id="button4">
+                <property name="label" translatable="yes">Reset Settings</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="reset_config" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">5</property>
+              </packing>
+            </child>
           </object>
         </child>
         <child type="tab">
@@ -734,7 +748,7 @@ Praytimes.org team</property>
                 <property name="can_focus">False</property>
                 <property name="model">adan_list</property>
                 <property name="active">0</property>
-                <signal name="changed" handler="changed_adan" swapped="no"/>
+                <signal name="changed" handler="change_adan_sound" swapped="no"/>
                 <child>
                   <object class="GtkCellRendererText" id="cellrenderertext4"/>
                   <attributes>
