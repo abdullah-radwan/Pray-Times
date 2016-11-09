@@ -7,24 +7,6 @@ Note: Download ummalqura library from here: https://github.com/tytkal/python-hij
 # Build & Install
 Just install the requirements and run PrayTimes**.py.
 
-To install the program on fedora, apply these commands:
-
-`sudo dnf install git gtk+  python3-pyglet python3-gobject`
-
-`cd`
-
-`git clone https://github.com/abdullah-radwan/Pray-Times`
-
-`cd  ~/Pray-Times`
-
-`sudo chmod 755 PrayTimesEn.py PrayTimesAr.py`
-
-`git clone https://github.com/tytkal/python-hijiri-ummalqura`
-
-`mv python-hijiri-ummalqura/umalqurra/ .`
-
-`./PrayTimesAr.py` for arabic, `./PrayTimesEn.py` for english.
-
 # Known Bugs
 When run the program for greater than one day, its give the pray times for the run day only. The timer solution is restart the program everyday.
 
